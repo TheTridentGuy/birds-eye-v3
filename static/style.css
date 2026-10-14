@@ -1,0 +1,64 @@
+* {
+    font-family: sans-serif;
+}
+body {
+    box-sizing: border-box;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+.flex-grow {
+    flex-grow: 1;
+}
+
+.flex {
+    flex: 1;
+}
+
+input, select, button, .red, .blue{
+    font-size: larger;
+    padding: 5px;
+    margin: 2px;
+}
+
+label {
+    font-size: large;
+    padding: 3px;
+    margin: 2px;
+}
+
+label > input {
+    display: none;
+}
+
+label:has(input:checked) {
+    border: 2px solid black;
+}
+
+.red, .blue{
+    border: 2px solid transparent;
+    color: white;
+    border-radius: 4px;
+}
+
+.red {
+    background: #ff4040;
+}
+
+.blue {
+    background: #4040ff;
+}
+
+span {
+    text-align: center;
+}
