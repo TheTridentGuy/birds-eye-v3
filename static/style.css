@@ -1,6 +1,7 @@
 * {
     font-family: sans-serif;
 }
+
 body {
     box-sizing: border-box;
     padding: 5px;
@@ -9,14 +10,17 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .flex-row {
     display: flex;
     flex-direction: row;
 }
+
 .flex-col {
     display: flex;
     flex-direction: column;
 }
+
 .flex-grow {
     flex-grow: 1;
 }
@@ -25,7 +29,7 @@ body {
     flex: 1;
 }
 
-input, select, button, .red, .blue{
+input, select, button, .red, .blue {
     font-size: larger;
     padding: 5px;
     margin: 2px;
@@ -45,7 +49,7 @@ label:has(input:checked) {
     border: 2px solid black;
 }
 
-.red, .blue{
+.red, .blue {
     border: 2px solid transparent;
     color: white;
     border-radius: 4px;

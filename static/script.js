@@ -1,3 +1,3 @@
-function $(selectors){
+function $(selectors) {
     return document.querySelector(selectors)
 }

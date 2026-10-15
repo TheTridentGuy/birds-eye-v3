@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Events</title>
+    <title>Events for {{ year }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
-
+{% for event in featured_events %}
+    <a href="/{{ year }}/{{ event["event_code"] }}">{{ event["name"] }} ({{ event["event_type_string"] }})</a>
+{% endfor %}
 </body>
 </html>
