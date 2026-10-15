@@ -9,7 +9,7 @@ __TBA_AUTH_HEADER = {"X-TBA-Auth-Key": os.environ["TBA_API_KEY"]}
 
 
 def get_events_by_year(year):
-    return requests.get(f"{__TBA_API_URL}/{year}/events", headers=__TBA_AUTH_HEADER).text
+    return requests.get(f"{__TBA_API_URL}/events/{year}", headers=__TBA_AUTH_HEADER).text
 
 
 def get_matches_by_event_json(event_key):
