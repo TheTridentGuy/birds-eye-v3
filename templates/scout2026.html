@@ -1,0 +1,40 @@
+{% extends "scout.html" %}
+{% block form %}
+<div class="flex-grow"></div>
+<div class="flex-row">
+    <button onclick="update_form('cycles', (value)=>{return value-1}, 0)" class="flex">-1</button>
+    <div class="flex-col flex">
+        <span>Cycles:</span>
+        <span id="cycles">0</span>
+    </div>
+    <button onload="console.log('loaded')" onclick="update_form('cycles', (value)=>{return value+1}, 0)" class="flex">+1</button>
+</div>
+<div class="flex-row">
+    <button onclick="update_form('fuel', (value)=>{return value-5}, 0)" class="flex">-5</button>
+    <button onclick="update_form('fuel', (value)=>{return value-1}, 0)" class="flex">-1</button>
+    <div class="flex-col flex">
+        <span>Fuel:</span>
+        <span id="fuel">0</span>
+    </div>
+    <button onclick="update_form('fuel', (value)=>{return value+1}, 0)" class="flex">+1</button>
+    <button onclick="update_form('fuel', (value)=>{return value+5}, 0)" class="flex">+5</button>
+</div>
+<div class="flex-col">
+    <label for="cycle-time">Cycle Time (sec):</label>
+    <input type="number" id="cycle-time" oninput="update_form('cycle_time', ()=>{return $('#cycle-time').value})">
+    <label for="climb-time">Climb Time (sec):</label>
+    <input type="number" id="climb-time" oninput="update_form('climb_time', ()=>{return $('#climb-time').value})">
+    <label for="defense-rating" class="flex">Defense Rating (1-5):</label>
+    <input type="number" id="defense-rating" oninput="update_form('defense_rating', ()=>{return $('#defense-rating').value})">
+    <label for="notes">Notes:</label>
+    <textarea name="notes" id="notes" rows="6" oninput="update_form('notes', ()=>{return $('#notes').value})"></textarea>
+</div>
+<script>
+    display_form("cycles", (value)=>{$("#cycles").innerText=value})
+    display_form("fuel", (value)=>{$("#fuel").innerText=value})
+    display_form("cycle_time", (value)=>{$("#cycle-time").value=value})
+    display_form("climb_time", (value)=>{$("#climb-time").value=value})
+    display_form("defense_rating", (value)=>{$("#defense-rating").value=value})
+    display_form("notes", (value)=>{$("#notes").value=value})
+</script>
+{% endblock %}

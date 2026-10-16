@@ -1,5 +1,4 @@
 import os
-
 import dotenv
 import requests
 
@@ -13,7 +12,7 @@ class TBAAPIException(Exception):
 
 
 def check_error(json):
-    if error := json.get("Error"):
+    if isinstance(json, dict ) and (error := json.get("Error")):
         raise TBAAPIException(error)
     return json
 

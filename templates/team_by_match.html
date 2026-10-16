@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>Teams in {{ match_key }}</title>
+</head>
+<body>
+    {% for team in blue_alliance %}
+        <a href="/{{ year }}/{{ event_code }}/{{ match_key }}/{{ team["team_number"] }}" class="blue">Blue {{ loop.index }}: {{ team["team_number"] }} ({{ team["nickname"] }})</a>
+    {% endfor %}
+    {% for team in red_alliance %}
+        <a href="/{{ year }}/{{ event_code }}/{{ match_key }}/{{ team["team_number"] }}" class="red">Red {{ loop.index }}: {{ team["team_number"] }} ({{ team["nickname"] }})</a>
+    {% endfor %}
+</body>
+</html>

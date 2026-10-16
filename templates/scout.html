@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <title>Title</title>
+    <script>
+        let year = {{ year }}
+        let event_code = "{{ event_code }}"
+        let match_key = "{{ match_key }}"
+        let team_number = "{{ team_number }}"
+
+        let form_key = `${year}${event_code}_${match_key}_frc${team_number}`
+        let displayers = {}
+
+        function load_form(){
+            let form = JSON.parse(localStorage.getItem(form_key))
+            return form?form:{}
+        }
+
+        function update_form(field, updater, initial){
+            let form = load_form()
+            if(!form[field]){
+                form[field] = initial
+            }
+            form[field] = updater(form[field])
+            let displayer = displayers[field]
+            if(displayer){
+                displayer(form[field])
+            }
+            localStorage.setItem(form_key, JSON.stringify(form))
+        }
+
+        function display_form(field, displayer){
+            displayers[field] = displayer
+            let form = load_form()
+            if(form && form[field]){
+                displayer(form[field])
+            }
+        }
+
+        function submit_form(){
+            if(!$("#confirm").checked){
+                return
+            }
+            fetch(location.pathname, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "year": year,
+                    "event_code": event_code,
+                    "match_key": match_key,
+                    "team_number": team_number,
+                    "form": load_form()
+                })
+            }).then(()=>{
+                location.href = "/"
+            })
+        }
+    </script>
+</head>
+<body>
+    <div class="flex-col flex-grow">
+        {% block form %}{% endblock %}
+    </div>
+    <div class="flex-row">
+        <div class="flex-grow"></div>
+        <input type="checkbox" name="confirm" id="confirm">
+        <label for="confirm">Yes, I want to submit this scouting report.</label>
+        <div class="flex-grow"></div>
+    </div>
+    <button onclick="submit_form()">Submit</button>
+</body>
+</html>
