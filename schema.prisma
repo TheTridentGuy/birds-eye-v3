@@ -6,8 +6,44 @@ datasource db {
 generator client {
   provider             = "prisma-client-py"
   recursive_type_depth = 5
+  interface            = "sync"
 }
 
 model Team {
-  number Int @id
+  number    Int        @id
+  events    Event[]
+  matches   Match[]
+  forms2026 Form2026[]
+}
+
+model Event {
+  key       String     @id
+  teams     Team[]
+  matches   Match[]
+  forms2026 Form2026[]
+}
+
+model Match {
+  code      String     @id
+  ordinal   Int
+  event_key String
+  event     Event      @relation(fields: [event_key], references: [key])
+  teams     Team[]
+  forms2026 Form2026[]
+}
+
+model Form2026 {
+  id             Int     @id @default(autoincrement())
+  team_number    Int
+  team           Team    @relation(fields: [team_number], references: [number])
+  event_key      String
+  event          Event   @relation(fields: [event_key], references: [key])
+  match_code     String
+  match          Match   @relation(fields: [match_code], references: [code])
+  cycles         Int?
+  fuel           Int?
+  cycle_time     Int?
+  climb_time     Int?
+  defense_rating Int?
+  notes          String?
 }

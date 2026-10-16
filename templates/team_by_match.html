@@ -8,11 +8,13 @@
     <title>Teams in {{ match_key }}</title>
 </head>
 <body>
-    {% for team in blue_alliance %}
-        <a href="/{{ year }}/{{ event_code }}/{{ match_key }}/{{ team["team_number"] }}" class="blue">Blue {{ loop.index }}: {{ team["team_number"] }} ({{ team["nickname"] }})</a>
-    {% endfor %}
-    {% for team in red_alliance %}
-        <a href="/{{ year }}/{{ event_code }}/{{ match_key }}/{{ team["team_number"] }}" class="red">Red {{ loop.index }}: {{ team["team_number"] }} ({{ team["nickname"] }})</a>
-    {% endfor %}
+{% for team in blue_alliance %}
+    <a href="/{{ year }}/{{ event_code }}/{{ match_key }}/{{ team["team_number"] }}"
+       class="blue">Blue {{ loop.index }}: {{ team["team_number"] }} ({{ team["nickname"] }})</a>
+{% endfor %}
+{% for team in red_alliance %}
+    <a href="/{{ year }}/{{ event_code }}/{{ match_key }}/{{ team["team_number"] }}"
+       class="red">Red {{ loop.index }}: {{ team["team_number"] }} ({{ team["nickname"] }})</a>
+{% endfor %}
 </body>
 </html>

@@ -8,8 +8,8 @@
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 <body>
-    {% for match_key in match_keys %}
-        <a href="/{{ year }}/{{ event["event_code"] }}/{{ match_key }}">{{ match_key }}</a>
-    {% endfor %}
+{% for match_key in match_keys %}
+    <a href="/{{ year }}/{{ event["event_code"] }}/{{ match_key }}">{{ match_key }}</a>
+{% endfor %}
 </body>
 </html>

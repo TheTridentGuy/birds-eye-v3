@@ -6,6 +6,7 @@ import dotenv
 from flask import Flask, redirect, render_template, request
 from jinja2 import TemplateNotFound
 
+import parse
 import tba
 
 app = Flask(__name__)
@@ -44,20 +45,28 @@ def team_by_match(year, event_code, match_key):
     match = tba.get_match(f"{year}{event_code}_{match_key}")
     blue_alliance = [tba.get_team(team_key) for team_key in match["alliances"]["blue"]["team_keys"]]
     red_alliance = [tba.get_team(team_key) for team_key in match["alliances"]["red"]["team_keys"]]
-    return render_template("team_by_match.html", year=year, event_code=event_code, match_key=match_key, blue_alliance=blue_alliance, red_alliance=red_alliance)
+    return render_template("team_by_match.html", year=year, event_code=event_code, match_key=match_key,
+                           blue_alliance=blue_alliance, red_alliance=red_alliance)
 
 
-@app.route("/<int:year>/<event_code>/<match_key>/<int:team_number>", methods=["GET", "POST"])
-def scout(year, event_code, match_key, team_number):
+@app.route("/<int:year>/<event_code>/<match_code>/<int:team_number>", methods=["GET", "POST"])
+def scout(year, event_code, match_code, team_number):
     if request.method == "GET":
-        match = tba.get_match(f"{year}{event_code}_{match_key}")
+        match = tba.get_match(f"{year}{event_code}_{match_code}")
         team = tba.get_team(f"frc{team_number}")
         print(match)
         try:
-            return render_template(f"scout{year}.html", year=year, event_code=event_code, match_key=match_key, team_number=team_number, team=team)
+            return render_template(f"scout{year}.html", year=year, event_code=event_code, match_code=match_code,
+                                   team_number=team_number, team=team)
         except TemplateNotFound:
             return f"No form for {year}.", 404
     else:
         assert request.method == "POST"
-        print(request.json)
-        return ""
+        try:
+            print(request.json)
+            parse.parse_form(request.json)
+            return ""
+        except parse.FormParseException as e:
+            logger.error(f"FormParseException: {e}")
+            logger.error(request.json)
+            return "Error parsing form. See logs for details.", 400
