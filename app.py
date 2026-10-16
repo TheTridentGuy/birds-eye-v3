@@ -52,9 +52,7 @@ def team_by_match(year, event_code, match_key):
 @app.route("/<int:year>/<event_code>/<match_code>/<int:team_number>", methods=["GET", "POST"])
 def scout(year, event_code, match_code, team_number):
     if request.method == "GET":
-        match = tba.get_match(f"{year}{event_code}_{match_code}")
         team = tba.get_team(f"frc{team_number}")
-        print(match)
         try:
             return render_template(f"scout{year}.html", year=year, event_code=event_code, match_code=match_code,
                                    team_number=team_number, team=team)
@@ -63,7 +61,6 @@ def scout(year, event_code, match_code, team_number):
     else:
         assert request.method == "POST"
         try:
-            print(request.json)
             parse.parse_form(request.json)
             return ""
         except parse.FormParseException as e:

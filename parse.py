@@ -38,6 +38,7 @@ def parse2026(form):
     event_key = f"2026{form['event_code']}"
     match_code = form['match_code']
     team_number = form["team_number"]
+    form = form["form"]
     cycles = form.get("cycles")
     fuel = form.get("fuel")
     cycle_time = form.get("cycle_time")
@@ -57,11 +58,11 @@ def parse2026(form):
     if fuel:
         data["fuel"] = fuel
     if cycle_time:
-        data["cycle_time"] = cycle_time
+        data["cycle_time"] = int(cycle_time)
     if climb_time:
-        data["climb_time"] = climb_time
+        data["climb_time"] = int(climb_time)
     if defense_rating:
-        data["defense_rating"] = defense_rating
+        data["defense_rating"] = int(defense_rating)
     if notes:
         data["notes"] = notes
     db.form2026.create(data=data)
