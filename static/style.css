@@ -29,7 +29,7 @@ body {
     flex: 1;
 }
 
-input, select, button, .red, .blue {
+input, select, button, .red, .blue, .gray {
     font-size: larger;
     padding: 5px;
     margin: 2px;
@@ -49,7 +49,7 @@ label:has(input:checked) {
     border: 2px solid black;
 }
 
-.red, .blue {
+.red, .blue, .gray {
     border: 2px solid transparent;
     color: white;
     border-radius: 4px;
@@ -61,6 +61,10 @@ label:has(input:checked) {
 
 .blue {
     background: #4040ff;
+}
+
+.gray {
+    background: #595959;
 }
 
 span {

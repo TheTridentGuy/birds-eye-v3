@@ -9,7 +9,7 @@
 </head>
 <body>
 {% for match_key in match_keys %}
-    <a href="/{{ year }}/{{ event["event_code"] }}/{{ match_key }}">{{ match_key }}</a>
+    <a href="/{{ year }}/{{ event["event_code"] }}/{{ match_key }}" class="gray">{{ match_key }}</a>
 {% endfor %}
 </body>
 </html>
