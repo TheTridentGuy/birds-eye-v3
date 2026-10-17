@@ -29,6 +29,9 @@
         <label for="defense-rating" class="flex">Defense Rating (1-5):</label>
         <input type="number" id="defense-rating"
                oninput="update_form('defense_rating', ()=>{return $('#defense-rating').value})">
+        <label for="driver-rating" class="flex">Driver Rating (1-5):</label>
+        <input type="number" id="driver-rating"
+               oninput="update_form('driver_rating', ()=>{return $('#driver-rating').value})">
         <label for="notes">Notes:</label>
         <textarea name="notes" id="notes" rows="6"
                   oninput="update_form('notes', ()=>{return $('#notes').value})"></textarea>
@@ -48,6 +51,9 @@
         })
         display_form("defense_rating", (value) => {
             $("#defense-rating").value = value
+        })
+        display_form("driver_rating", (value) => {
+            $("#driver-rating").value = value
         })
         display_form("notes", (value) => {
             $("#notes").value = value

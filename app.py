@@ -1,6 +1,7 @@
 import datetime
 import logging
 import os
+import re
 
 import dotenv
 from flask import Flask, redirect, render_template, request
@@ -37,6 +38,10 @@ def matches_by_event(year, event_code):
     event_key = f"{year}{event_code}"
     event = tba.get_event(event_key)
     match_keys = [match_key.split("_")[1] for match_key in tba.get_match_keys_by_event(event_key)]
+    match_keys.sort(key=lambda c: (
+        {"pm": 0, "qm": 1, "ef": 2, "qf": 3, "sf": 4, "f": 5}.get(re.match(r"[a-z]*", c.lower())[0], 9),
+        *map(int, re.findall(r"\d+", c)),
+    ))
     return render_template("matches_by_event.html", year=year, event=event, match_keys=match_keys)
 
 

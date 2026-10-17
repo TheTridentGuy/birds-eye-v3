@@ -45,5 +45,6 @@ model Form2026 {
   cycle_time     Int?
   climb_time     Int?
   defense_rating Int?
+  driver_rating  Int?
   notes          String?
 }

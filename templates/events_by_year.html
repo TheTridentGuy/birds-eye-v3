@@ -9,7 +9,8 @@
 </head>
 <body>
 {% for event in featured_events %}
-    <a href="/{{ year }}/{{ event["event_code"] }}" class="gray">{{ event["name"] }} ({{ event["event_type_string"] }})</a>
+    <a href="/{{ year }}/{{ event["event_code"] }}" class="gray">{{ event["name"] }}
+        ({{ event["event_type_string"] }})</a>
 {% endfor %}
 </body>
 </html>

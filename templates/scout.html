@@ -58,7 +58,7 @@
                     "form": load_form()
                 })
             }).then(() => {
-                location.href = "/"
+                location.href = location.pathname.split("/").slice(0, -2).join("/")
             })
         }
     </script>

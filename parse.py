@@ -30,7 +30,8 @@ def event_get_or_create(event_key):
 def match_get_or_create(event, match_code):
     match = db.match.find_unique(where={"code": match_code})
     if not match:
-        match = db.match.create(data={"code": match_code, "event_key": event.key, "ordinal": tba.get_match(f"{event.key}_{match_code}").get("time", 0)})
+        match = db.match.create(data={"code": match_code, "event_key": event.key,
+                                      "ordinal": tba.get_match(f"{event.key}_{match_code}").get("time", 0)})
     return match
 
 
@@ -44,6 +45,7 @@ def parse2026(form):
     cycle_time = form.get("cycle_time")
     climb_time = form.get("climb_time")
     defense_rating = form.get("defense_rating")
+    driver_rating = form.get("driver_rating")
     notes = form.get("notes")
     team = team_get_or_create(team_number)
     event = event_get_or_create(event_key)
@@ -63,6 +65,8 @@ def parse2026(form):
         data["climb_time"] = int(climb_time)
     if defense_rating:
         data["defense_rating"] = int(defense_rating)
+    if driver_rating:
+        data["driver_rating"] = int(driver_rating)
     if notes:
         data["notes"] = notes
     db.form2026.create(data=data)
