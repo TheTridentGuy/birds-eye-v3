@@ -48,8 +48,8 @@ def matches_by_event(year, event_code):
 @app.route("/<int:year>/<event_code>/<match_key>")
 def team_by_match(year, event_code, match_key):
     match = tba.get_match(f"{year}{event_code}_{match_key}")
-    blue_alliance = [tba.get_team(team_key) for team_key in match["alliances"]["blue"]["team_keys"]]
-    red_alliance = [tba.get_team(team_key) for team_key in match["alliances"]["red"]["team_keys"]]
+    blue_alliance = [tba.get_team(team_key.strip("B")) for team_key in match["alliances"]["blue"]["team_keys"]]
+    red_alliance = [tba.get_team(team_key.strip("B")) for team_key in match["alliances"]["red"]["team_keys"]]
     return render_template("team_by_match.html", year=year, event_code=event_code, match_key=match_key,
                            blue_alliance=blue_alliance, red_alliance=red_alliance)
 
